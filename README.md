@@ -72,6 +72,10 @@ npm run lint
 
 You can customize the ESLint rules by modifying the `.eslintrc` file.
 
+## SupaBase credentails
+```ProjectName = the-wild-oasis```
+```Password = Wildoasis@24```
+
 ## Contribution Guidelines
 
 We welcome contributions to enhance The Wild Oasis application. Please follow these steps to contribute:
