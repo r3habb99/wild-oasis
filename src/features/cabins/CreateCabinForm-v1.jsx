@@ -1,26 +1,19 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import toast from 'react-hot-toast';
-import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import styled from 'styled-components';
 
-// APi Imports
-import { createCabin } from '../../services/apiCabins';
-
-// UI imports
 import Input from '../../ui/Input';
 import Form from '../../ui/Form';
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
+import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createCabin } from '../../services/apiCabins';
+import toast from 'react-hot-toast';
 import FormRow from '../../ui/FormRow';
 
-function CreateCabinForm({ cabinToEdit = {} }) {
-  const { id: editId, ...editValues } = cabinToEdit;
-  const isEditSession = Boolean(editId);
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
-    defaultValues: isEditSession ? editValues : {},
-  });
+function CreateCabinForm() {
+  const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
   const queryClient = useQueryClient();
   const { mutate, isLoading: isCreating } = useMutation({
@@ -135,7 +128,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           size="medium"
           disabled={isCreating}
         >
-          {isEditSession ? 'Edit Cabin' : 'Add New Cabin'}
+          Add cabin
         </Button>
       </FormRow>
     </Form>
