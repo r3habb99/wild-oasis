@@ -12,7 +12,7 @@ import FormRow from '../../ui/FormRow';
 import { useCreateCabin } from './useCreateCabin-hook';
 import { useUpdateCabin } from './useUpdateCabin-hook';
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isUpdating, updateCabin } = useUpdateCabin();
 
@@ -31,15 +31,32 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     if (isEditSession)
       updateCabin(
         { newCabinData: { ...data, image }, id: editId },
-        { onSuccess: (data) => reset() }
+        {
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.();
+          },
+        }
       );
-    else createCabin({ ...data, image }, { onSuccess: (data) => reset() });
+    else
+      createCabin(
+        { ...data, image },
+        {
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.();
+          },
+        }
+      );
   }
   function onError(errors) {
     //console.log(errors);
   }
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? 'modal' : 'regular'}
+    >
       <FormRow
         label="Cabin Name"
         error={errors?.name?.message}
@@ -129,6 +146,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           variation="secondary"
           size="medium"
           type="reset"
+          onClick={() => onCloseModal?.()}
         >
           Cancel
         </Button>
