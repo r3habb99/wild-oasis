@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
 
@@ -11,20 +10,18 @@ import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
 import { useCreateCabin } from './useCreateCabin-hook';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
-import Table from '../../ui/Table';
-import Menus from '../../ui/Menus';
 
-// const TableRow = styled.div`
-//   display: grid;
-//   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-//   column-gap: 2.4rem;
-//   align-items: center;
-//   padding: 1.4rem 2.4rem;
+const TableRow = styled.div`
+  display: grid;
+  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
+  column-gap: 2.4rem;
+  align-items: center;
+  padding: 1.4rem 2.4rem;
 
-//   &:not(:last-child) {
-//     border-bottom: 1px solid var(--color-grey-100);
-//   }
-// `;
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-grey-100);
+  }
+`;
 
 const Img = styled.img`
   display: block;
@@ -53,10 +50,10 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
-// const ButtonContainer = styled.div`
-//   display: flex;
-//   gap: 0.5rem;
-// `;
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
 
 function CabinRow({ cabin }) {
   const { isDeleting, deleteCabin } = useDeleteCabin();
@@ -82,7 +79,7 @@ function CabinRow({ cabin }) {
     });
   }
   return (
-    <Table.Row>
+    <TableRow role="row">
       <Img src={image} />
       <Cabin>{name}</Cabin>
       <div>Fits upto {maxCapacity} guests</div>
@@ -92,8 +89,10 @@ function CabinRow({ cabin }) {
       ) : (
         <span>-</span>
       )}
-      <div>
+      <ButtonContainer>
         <Button
+          variation="secondary"
+          size="small"
           onClick={handleDuplicate}
           disabled={isCreating}
         >
@@ -101,7 +100,10 @@ function CabinRow({ cabin }) {
         </Button>
         <Modal>
           <Modal.Open opens="edit">
-            <Button>
+            <Button
+              variation="secondary"
+              size="small"
+            >
               <HiPencil />
             </Button>
           </Modal.Open>
@@ -109,7 +111,10 @@ function CabinRow({ cabin }) {
             <CreateCabinForm cabinToEdit={cabin} />
           </Modal.Window>
           <Modal.Open opens="delete">
-            <Button>
+            <Button
+              variation="danger"
+              size="small"
+            >
               <HiTrash />
             </Button>
           </Modal.Open>
@@ -121,17 +126,8 @@ function CabinRow({ cabin }) {
             />
           </Modal.Window>
         </Modal>
-
-        <Menus.Menu>
-          <Menus.Toggle id={cabinId} />
-          <Menus.Menu id={cabinId}>
-            <Menus.Button icon={<HiSquare2Stack />}>Duplicate</Menus.Button>
-            <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
-            <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
-          </Menus.Menu>
-        </Menus.Menu>
-      </div>
-    </Table.Row>
+      </ButtonContainer>
+    </TableRow>
   );
 }
 

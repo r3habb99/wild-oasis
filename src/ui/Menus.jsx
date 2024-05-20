@@ -1,6 +1,12 @@
-import styled from "styled-components";
+/* eslint-disable react/prop-types */
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable no-unused-vars */
+import { createContext, useContext, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { HiEllipsisVertical } from 'react-icons/hi2';
+import styled from 'styled-components';
 
-const StyledMenu = styled.div`
+const Menu = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -60,3 +66,64 @@ const StyledButton = styled.button`
     transition: all 0.3s;
   }
 `;
+
+const MenusContext = createContext();
+
+function Menus({ children }) {
+  const [openId, setOpenId] = useState('');
+  const [position, setPosition] = useState(null);
+  const close = () => setOpenId('');
+  const open = setOpenId;
+
+  const contextValue = useMemo(
+    () => ({ openId, close, open, position, setPosition }),
+    [open, openId, position]
+  );
+  return (
+    <MenusContext.Provider value={contextValue}>
+      {children}
+    </MenusContext.Provider>
+  );
+}
+
+function Toggle({ id }) {
+  const { openId, open, close, setPosition } = useContext(MenusContext);
+  function handleClick(e) {
+    const rect = e.target.closest('button').getBoundingClientRect();
+    setPosition({
+      x: window.innerWidth - rect.width - rect.x,
+      y: rect.y + rect.height + 8,
+    });
+    openId === '' || openId !== id ? open(id) : close();
+  }
+  return (
+    <StyledToggle onClick={handleClick}>
+      <HiEllipsisVertical />
+    </StyledToggle>
+  );
+}
+
+function List({ id, children }) {
+  const { openId, position } = useContext(MenusContext);
+  if (openId !== id) return null;
+
+  return createPortal(
+    <StyledList position={position}>{children}</StyledList>,
+    document.body
+  );
+}
+
+function Button({ children }) {
+  return (
+    <li>
+      <StyledButton>{children}</StyledButton>
+    </li>
+  );
+}
+
+Menus.Menu = Menu;
+Menus.Toggle = Toggle;
+Menus.List = List;
+Menus.Button = Button;
+
+export default Menus;
