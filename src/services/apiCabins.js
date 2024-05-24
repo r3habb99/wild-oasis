@@ -3,8 +3,7 @@ import supabase, { supabaseUrl } from './supabase';
 export async function getCabins() {
   const { data, error } = await supabase.from('cabins').select('*');
   if (error) {
-    console.log(error);
-    throw new Error('Cabins could not be loaded');
+    throw new Error(`Cabins could not be loaded ${error.message}`);
   }
   return data;
 }
@@ -82,8 +81,7 @@ export async function createEditCabin(newCabin, id) {
   const { data, error } = await query.select().single();
 
   if (error) {
-    console.log(error);
-    throw new Error('Cabins could not be created or edited');
+    throw new Error(`Cabins could not be created or edited ${error.message}`);
   }
 
   // 2. Upload Image if it's a new file
@@ -95,9 +93,8 @@ export async function createEditCabin(newCabin, id) {
     // 3. Delete the cabin if there was an error uploading image
     if (storageError) {
       await supabase.from('cabins').delete().eq('id', data.id);
-      console.log(storageError);
       throw new Error(
-        'Cabins image could not be uploaded and the cabin was not created'
+        `Cabins image could not be uploaded and the cabin was not created ${error.message}`
       );
     }
   }
@@ -109,8 +106,7 @@ export async function createEditCabin(newCabin, id) {
 export async function deleteCabin(id) {
   const { data, error } = await supabase.from('cabins').delete().eq('id', id);
   if (error) {
-    console.log(error);
-    throw new Error('Cabin could not be deleted');
+    throw new Error(`Cabin could not be deleted ${error.message}`);
   }
   return data;
 }

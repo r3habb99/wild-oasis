@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import { createContext, useContext, useMemo } from 'react';
 import styled from 'styled-components';
 

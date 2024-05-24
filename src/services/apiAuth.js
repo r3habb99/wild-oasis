@@ -12,7 +12,7 @@ export async function signup({ fullName, email, password }) {
     },
   });
   if (error) {
-    throw new Error(error.message);
+    throw new Error(`Sign Up Failed ${error.message}`);
   }
   return data;
 }
@@ -23,7 +23,7 @@ export async function login({ email, password }) {
     password,
   });
   if (error) {
-    throw new Error(error.message);
+    throw new Error(`Login Failed ${error.message}`);
   }
   return data;
 }
@@ -40,6 +40,6 @@ export async function getCurrentUser() {
 export async function logout() {
   const { error } = await supabase.auth.signOut();
   if (error) {
-    throw new Error(error.message);
+    throw new Error(`Get Current User Failed to Fetch ${error.message}`);
   }
 }
