@@ -28,8 +28,7 @@ export async function getBookings({ filter, sortBy, page }) {
 
   const { data, error, count } = await query;
   if (error) {
-    console.log(error);
-    throw new Error('Bookings could not be loaded');
+    throw new Error(`Bookings could not be loaded ${error.message}`);
   }
   return { data, count };
 }
@@ -42,8 +41,7 @@ export async function getBooking(id) {
     .single();
 
   if (error) {
-    console.error(error);
-    throw new Error('Booking not found');
+    throw new Error(`Booking not found ${error.message}`);
   }
 
   return data;
@@ -58,8 +56,9 @@ export async function getBookingsAfterDate(date) {
     .lte('created_at', getToday({ end: true }));
 
   if (error) {
-    console.error(error);
-    throw new Error('Bookings could not get loaded');
+    throw new Error(
+      `Bookings after date could not get loaded ${error.message}`
+    );
   }
 
   return data;
@@ -75,8 +74,9 @@ export async function getStaysAfterDate(date) {
     .lte('startDate', getToday());
 
   if (error) {
-    console.error(error);
-    throw new Error('Bookings could not get loaded');
+    throw new Error(
+      `Bookings stays after date could not get loaded ${error.message}`
+    );
   }
 
   return data;
@@ -97,8 +97,9 @@ export async function getStaysTodayActivity() {
   // (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
 
   if (error) {
-    console.error(error);
-    throw new Error('Bookings could not get loaded');
+    throw new Error(
+      `Bookings stays today activity could not get loaded ${error.message}`
+    );
   }
   return data;
 }
@@ -112,8 +113,7 @@ export async function updateBooking(id, obj) {
     .single();
 
   if (error) {
-    console.error(error);
-    throw new Error('Booking could not be updated');
+    throw new Error(`Booking could not be updated ${error.message}`);
   }
   return data;
 }
@@ -123,8 +123,7 @@ export async function deleteBooking(id) {
   const { data, error } = await supabase.from('bookings').delete().eq('id', id);
 
   if (error) {
-    console.error(error);
-    throw new Error('Booking could not be deleted');
+    throw new Error(`Booking could not be deleted ${error.message}`);
   }
   return data;
 }

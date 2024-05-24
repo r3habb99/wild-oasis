@@ -1,4 +1,6 @@
-import styled from "styled-components";
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable no-unused-vars */
+import styled from 'styled-components';
 
 const StyledTodayItem = styled.li`
   display: grid;

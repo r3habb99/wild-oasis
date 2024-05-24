@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react-refresh/only-export-components */
-/* eslint-disable no-unused-vars */
 import { createContext, useContext, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { HiEllipsisVertical } from 'react-icons/hi2';

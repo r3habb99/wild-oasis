@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 import Button from './Button';
 import Heading from './Heading';
