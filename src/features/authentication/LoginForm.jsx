@@ -49,6 +49,7 @@ function LoginForm() {
       </FormRowVertical>
       <FormRowVertical>
         <Button
+          variation="primary"
           size="large"
           disabled={isLoading}
         >
