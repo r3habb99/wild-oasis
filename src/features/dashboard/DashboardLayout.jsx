@@ -1,5 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
-/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 import { useRecentBookings } from './useRecentBookings-hook';
 import Spinner from '../../ui/Spinner';

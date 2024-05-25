@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { HiOutlineBriefcase, HiOutlineChartBar } from 'react-icons/hi';
 import Stat from './Stat';
