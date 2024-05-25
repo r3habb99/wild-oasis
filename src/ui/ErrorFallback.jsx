@@ -42,6 +42,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
       <StyledErrorFallback>
         <Box>
           <Heading as="h1">Something went wrong 😳</Heading>
+          console.log(error.message)
           <p>{error.message}</p>
           <Button
             size="large"
