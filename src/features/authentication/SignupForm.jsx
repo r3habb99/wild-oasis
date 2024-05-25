@@ -93,6 +93,7 @@ function SignupForm() {
           variation="secondary"
           size="medium"
           type="reset"
+          onClick={reset}
           disabled={isLoading}
         >
           Cancel
