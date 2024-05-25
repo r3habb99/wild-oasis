@@ -110,7 +110,7 @@ function CheckinBooking() {
 
       <ButtonGroup>
         <Button
-          variation="success"
+          variation="primary"
           size="medium"
           onClick={handleCheckin}
           disabled={!confirmPaid || isCheckIn}
