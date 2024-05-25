@@ -4,7 +4,7 @@ import Logo from './Logo';
 import MainNav from './MainNav';
 
 // Upload sample data
-import Uploader from '../data/Uploader'
+// import Uploader from '../data/Uploader'
 
 const StyledSidebar = styled.aside`
   background-color: var(--color-grey-0);
@@ -21,7 +21,7 @@ function Sidebar() {
     <StyledSidebar>
       <Logo />
       <MainNav />
-      <Uploader />
+      {/* <Uploader /> */}
     </StyledSidebar>
   );
 }
