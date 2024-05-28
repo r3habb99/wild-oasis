@@ -11,8 +11,8 @@ function Bookings() {
         <Heading as="h1">All bookings</Heading>
         <BookingTableOperations />
       </Row>
-      <BookingTable />
       <AddBooking />
+      <BookingTable />
     </>
   );
 }

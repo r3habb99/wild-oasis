@@ -1,6 +1,6 @@
 import Button from '../../ui/Button';
 import Modal from '../../ui/Modal';
-import CreateCabinForm from '../cabins/CreateCabinForm';
+import NewBookingForm from './NewBookingForm';
 
 function AddBooking() {
   return (
@@ -15,7 +15,7 @@ function AddBooking() {
           </Button>
         </Modal.Open>
         <Modal.Window name="newbooking-form">
-          <CreateCabinForm />
+          <NewBookingForm />
         </Modal.Window>
       </Modal>
     </div>
