@@ -18,7 +18,7 @@ import Button from '../../ui/Button';
 
 import { useCabins } from '../cabins/useCabins-hook';
 import { useSettings } from '../settings/useSettings-hook';
-import { useGuests } from '../../hooks/useGuests';
+import { useGuests } from '../guests/useGuests-hook';
 import { useCreateBooking } from './useCreateBooking-hook';
 
 const StyledSelect = styled.select`
@@ -44,7 +44,6 @@ function NewBookingForm({ onCloseModal }) {
     getValues,
     reset,
   } = useForm();
-
   if (isLoading || isLoadingSettings || isLoadingGuests) return <Spinner />;
   function onSubmit(data) {
     const numNights = differenceInDays(

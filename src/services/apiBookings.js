@@ -134,5 +134,5 @@ export async function createBooking(newBooking) {
 
   if (error) throw new Error(error.message);
 
-  return data;
+  return data[0];
 }
