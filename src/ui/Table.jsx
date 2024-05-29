@@ -38,11 +38,13 @@ const StyledHeader = styled(CommonRow)`
   text-transform: uppercase;
   letter-spacing: 0.4px;
   font-weight: 600;
+  text-align: center;
   color: var(--color-grey-600);
 `;
 
 const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
+  text-align: center;
   background-color: ${(props) =>
     props.index % 2 === 0
       ? 'var(--color-grey-10)'
