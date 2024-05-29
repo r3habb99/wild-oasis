@@ -23,7 +23,6 @@ export async function addGuest(newGuest) {
     .from('guests')
     .insert([{ ...newGuest }])
     .select();
-  console.log(data, '>>>>>>>>>');
   if (error) throw new Error(error.message);
 
   return data[0];

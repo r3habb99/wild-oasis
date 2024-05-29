@@ -7,24 +7,38 @@ import DarkModeToggle from './DarkModeToggle';
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
-  gap: 0.4rem;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const MenuItem = styled.li`
+  font-size: 1.6rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--color-primary);
+  }
 `;
 
 function HeaderMenu() {
   const navigate = useNavigate();
   return (
     <StyledHeaderMenu>
-      <li>
+      <MenuItem>
         <ButtonIcon onClick={() => navigate('/account')}>
           <HiOutlineUser />
         </ButtonIcon>
-      </li>
-      <li>
+      </MenuItem>
+      <MenuItem>
         <DarkModeToggle />
-      </li>
-      <li>
+      </MenuItem>
+      <MenuItem>
         <Logout />
-      </li>
+      </MenuItem>
     </StyledHeaderMenu>
   );
 }

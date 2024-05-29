@@ -4,11 +4,23 @@ import styled from 'styled-components';
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
-
-  font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Optional subtle shadow */
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    padding: 1rem 1.6rem;
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    /* Add styles for tablets here (optional) */
+  }
+
+  @media (min-width: 1024px) {
+    /* Add styles for desktops here (optional) */
+  }
 `;
 
 const CommonRow = styled.div`
@@ -21,7 +33,6 @@ const CommonRow = styled.div`
 
 const StyledHeader = styled(CommonRow)`
   padding: 1.6rem 2.4rem;
-
   background-color: var(--color-grey-50);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;
@@ -32,6 +43,10 @@ const StyledHeader = styled(CommonRow)`
 
 const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
+  background-color: ${(props) =>
+    props.index % 2 === 0
+      ? 'var(--color-grey-10)'
+      : 'transparent'}; /* Zebra stripes */
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
@@ -40,6 +55,7 @@ const StyledRow = styled(CommonRow)`
 
 const StyledBody = styled.section`
   margin: 0.4rem 0;
+  overflow-x: auto; /* Enable horizontal scrolling (optional) */
 `;
 
 const Footer = styled.footer`
@@ -48,7 +64,6 @@ const Footer = styled.footer`
   justify-content: center;
   padding: 1.2rem;
 
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
   &:not(:has(*)) {
     display: none;
   }
