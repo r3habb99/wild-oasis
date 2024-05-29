@@ -63,6 +63,31 @@ const Button = styled.button`
   box-shadow: var(--shadow-sm);
   ${(props) => sizes[props.size]}
   ${(props) => variations[props.variation]}
+
+  @media (max-width: 768px) {
+    ${(props) =>
+      props.size === 'large' &&
+      css`
+        font-size: 1.4rem;
+        padding: 1rem 1.6rem;
+      `}
+  }
+
+  @media (max-width: 480px) {
+    ${(props) =>
+      props.size === 'large' &&
+      css`
+        font-size: 1.2rem;
+        padding: 0.8rem 1.2rem;
+      `}
+
+    ${(props) =>
+      props.size === 'medium' &&
+      css`
+        font-size: 1.2rem;
+        padding: 0.8rem 1.4rem;
+      `}
+  }
 `;
 
 Button.defaultProps = {
