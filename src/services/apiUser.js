@@ -1,7 +1,10 @@
 import supabase from './supabase';
 import { PAGE_SIZE } from '../utils/constants';
+import { handleError } from '../utils/errorHandler';
 
-export async function getGuests({ page, pageSize = PAGE_SIZE }) {
+
+// Get a paginated list of guests
+export async function getGuests({ page = 1, pageSize = PAGE_SIZE }) {
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
@@ -10,7 +13,7 @@ export async function getGuests({ page, pageSize = PAGE_SIZE }) {
     .select('*', { count: 'exact' })
     .range(from, to);
 
-  if (error) throw new Error(error.message);
+  handleError(error, 'Loading guests');
 
   return {
     data,
@@ -18,12 +21,14 @@ export async function getGuests({ page, pageSize = PAGE_SIZE }) {
   };
 }
 
+// Add a new guest to the database
 export async function addGuest(newGuest) {
   const { data, error } = await supabase
     .from('guests')
-    .insert([{ ...newGuest }])
+    .insert([newGuest])
     .select();
-  if (error) throw new Error(error.message);
+
+  handleError(error, 'Adding guest');
 
   return data[0];
 }
